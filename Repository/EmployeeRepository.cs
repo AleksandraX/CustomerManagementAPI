@@ -1,8 +1,8 @@
 ﻿using Contracts;
-using Entities;
-using Entities.Models;
+using CustomerManagementPortal.Entities;
+using CustomerManagementPortal.Entities.Models;
 
-namespace Repository
+namespace CustomerManagementPortal.Repository
 {
     public class EmployeeRepository: RepositoryBase<Employee>, IEmployeeRepository
     {

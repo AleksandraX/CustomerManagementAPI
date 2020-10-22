@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Contracts;
-using Entities;
-using Entities.Models;
+using CustomerManagementPortal.Entities;
+using CustomerManagementPortal.Entities.Models;
 
-namespace Repository
+namespace CustomerManagementPortal.Repository
 {
     public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
     {

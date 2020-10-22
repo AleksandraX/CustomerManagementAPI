@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using CustomerManagementPortal.Contracts;
+using CustomerManagementPortal.Entities.Models;
 
 namespace Contracts
 {

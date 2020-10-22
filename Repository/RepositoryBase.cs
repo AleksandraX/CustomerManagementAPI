@@ -1,46 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using Contracts;
-using Entities;
+using CustomerManagementPortal.Contracts;
+using CustomerManagementPortal.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Repository
+namespace CustomerManagementPortal.Repository
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T: class
     {
-        protected RepositoryContext repositoryContext;
+        protected readonly  RepositoryContext RepositoryContext;
+        protected readonly DbSet<T> DbSet;
 
-        public RepositoryBase(RepositoryContext repositoryContext)
+        protected RepositoryBase(RepositoryContext repositoryContext)
         {
-            this.repositoryContext = repositoryContext;
+            this.RepositoryContext = repositoryContext;
+            this.DbSet = repositoryContext.Set<T>();
         }
 
         public IQueryable<T> FindAll(bool trackChanges) =>
-            trackChanges ? repositoryContext.Set<T>() : repositoryContext.Set<T>().AsNoTracking();
+            trackChanges ? this.DbSet : this.DbSet.AsNoTracking();
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
         {
             return trackChanges
-                ? repositoryContext.Set<T>().Where(expression)
-                : repositoryContext.Set<T>().Where(expression).AsNoTracking();
+                ? this.DbSet.Where(expression)
+                : this.DbSet.Where(expression).AsNoTracking();
         }
 
         public void Create(T entity)
         {
-            repositoryContext.Set<T>().Add(entity);
+            this.DbSet.Add(entity);
         }
 
         public void Update(T entity)
         {
-            repositoryContext.Set<T>().Update(entity);
+            this.DbSet.Update(entity);
         }
 
         public void Delete(T entity)
         {
-            repositoryContext.Set<T>().Remove(entity);
+            this.DbSet.Remove(entity);
         }
     }
 }

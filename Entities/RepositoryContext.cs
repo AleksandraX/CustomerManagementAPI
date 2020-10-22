@@ -1,8 +1,8 @@
-﻿using Entities.Configuration;
-using Entities.Models;
+﻿using CustomerManagementPortal.Entities.Configuration;
+using CustomerManagementPortal.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Entities
+namespace CustomerManagementPortal.Entities
 {
     public class RepositoryContext : DbContext
     {
@@ -10,13 +10,15 @@ namespace Entities
             : base(options)
         {
         }
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CompanyConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new AddressConfiguration());
         }
     }
 

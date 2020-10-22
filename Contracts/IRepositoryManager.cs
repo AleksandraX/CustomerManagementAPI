@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Contracts;
 
-namespace Contracts
+namespace CustomerManagementPortal.Contracts
 {
     public interface IRepositoryManager
     {
         ICompanyRepository Company { get; }
         IEmployeeRepository Employee { get; }
+        ICustomerRepository Customer { get; }
         void Save();
     }
 }

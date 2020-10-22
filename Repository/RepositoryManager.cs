@@ -1,23 +1,27 @@
 ﻿using Contracts;
-using Entities;
+using CustomerManagementPortal.Contracts;
+using CustomerManagementPortal.Entities;
 
-namespace Repository
+namespace CustomerManagementPortal.Repository
 {
     public class RepositoryManager: IRepositoryManager
     {
-        private readonly RepositoryContext repositoryContext;
-        private ICompanyRepository companyRepository;
-        private IEmployeeRepository employeeRepository;
+        private readonly RepositoryContext _repositoryContext;
+        private ICompanyRepository _companyRepository;
+        private IEmployeeRepository _employeeRepository;
+        private ICustomerRepository _customerRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
-            this.repositoryContext = repositoryContext;
+            this._repositoryContext = repositoryContext;
         }
 
-        public ICompanyRepository Company => companyRepository ??= new CompanyRepository(repositoryContext);
+        public ICompanyRepository Company => _companyRepository ??= new CompanyRepository(_repositoryContext);
 
-        public IEmployeeRepository Employee => employeeRepository ??= new EmployeeRepository(repositoryContext);
+        public IEmployeeRepository Employee => _employeeRepository ??= new EmployeeRepository(_repositoryContext);
 
-        public void Save() => repositoryContext.SaveChanges();
+        public ICustomerRepository Customer => _customerRepository ??= new CustomerRepository(_repositoryContext);
+
+        public void Save() => _repositoryContext.SaveChanges();
     }
 }

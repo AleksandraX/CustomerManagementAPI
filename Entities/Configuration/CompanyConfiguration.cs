@@ -1,5 +1,5 @@
 ﻿using System;
-using Entities.Models;
+using CustomerManagementPortal.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
