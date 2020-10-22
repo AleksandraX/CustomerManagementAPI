@@ -1,0 +1,4 @@
+2020-09-26 22:23:29.2423 INFO Here is info message from our values controller.
+2020-09-26 22:23:29.3338 DEBUG Here is debug message from our values controller.
+2020-09-26 22:23:29.3338 WARN Here is warn message from our values controller.
+2020-09-26 22:23:29.3524 ERROR Here is an error message from our values controller.
