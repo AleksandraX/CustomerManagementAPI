@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Entities.DataTransferredObjects
+namespace CustomerManagementPortal.Entities.DataTransferredObjects
 {
     public class CompanyDto
     {

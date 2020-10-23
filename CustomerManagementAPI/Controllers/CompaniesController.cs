@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CustomerManagementPortal.Contracts;
-using Entities.DataTransferredObjects;
+using CustomerManagementPortal.Entities.DataTransferredObjects;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 

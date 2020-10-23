@@ -9,5 +9,11 @@ namespace CustomerManagementPortal.Contracts
         public IEnumerable<Customer> GetAllCustomers();
 
         public Customer GetCustomerById(Guid id, bool trackChanges);
+
+        public void CreateCustomer(Customer customer);
+
+        public IEnumerable<Customer> GetByIds(IEnumerable<Guid> ids, bool trackChanges);
+
+        public void DeleteCustomer(Customer customer);
     }
 }

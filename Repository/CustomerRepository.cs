@@ -28,5 +28,21 @@ namespace CustomerManagementPortal.Repository
 
             return customer;
         }
+
+        public void CreateCustomer(Customer customer)
+        {
+            base.Create(customer);
+        }
+
+        public IEnumerable<Customer> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+        {
+            return base.FindByCondition(c => ids.Contains(c.Id), trackChanges)
+                .ToList();
+        }
+
+        public void DeleteCustomer(Customer customer)
+        {
+            base.Delete(customer);
+        }
     }
 }
