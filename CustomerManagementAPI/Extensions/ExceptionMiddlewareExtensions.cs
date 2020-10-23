@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 
-namespace CodeMaze.Extensions
+namespace CustomerManagementPortal.Api.Extensions
 {
     public static class ExceptionMiddlewareExtensions
     {

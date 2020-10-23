@@ -1,15 +1,13 @@
-﻿using Contracts;
-using CustomerManagementPortal.Contracts;
+﻿using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities;
 using CustomerManagementPortal.Repository;
-using Entities;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CodeMaze.Extensions
+namespace CustomerManagementPortal.Api.Extensions
 {
     public static class ServiceExtensions
     {

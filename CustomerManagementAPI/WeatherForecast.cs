@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeMaze
+namespace CustomerManagementPortal.Api
 {
     public class WeatherForecast
     {

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CustomerManagementPortal.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Entities.Configuration
+namespace CustomerManagementPortal.Entities.Configuration
 {
     public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {

@@ -1,5 +1,5 @@
 using System.IO;
-using CodeMaze.Extensions;
+using CustomerManagementPortal.Api.Extensions;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
 
-namespace CodeMaze
+namespace CustomerManagementPortal.Api
 {
     public class Startup
     {

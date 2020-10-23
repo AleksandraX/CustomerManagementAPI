@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Contracts;
 using CustomerManagementPortal.Contracts;
 using Entities.DataTransferredObjects;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CodeMaze.Controllers
+namespace CustomerManagementPortal.Api.Controllers
 {
     [Route("api/companies")]
     [ApiController]

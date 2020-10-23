@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.DataTransferredObjects;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 
-namespace CodeMaze.Formatters
+namespace CustomerManagementPortal.Api.Formatters
 {
     public class CsvCustomFormatter : TextOutputFormatter
     {
