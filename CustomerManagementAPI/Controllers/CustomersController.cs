@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerManagementPortal.Api.Controllers
 {
-    [Route("api/customers")]
     [ApiController]
+    [Route("api/customers")]
     public class CustomersController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
@@ -19,7 +19,7 @@ namespace CustomerManagementPortal.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public IActionResult GetAllCustomers()
         {
             var customers = _repository.Customer.GetAllCustomers();
