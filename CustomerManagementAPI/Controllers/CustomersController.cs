@@ -95,6 +95,36 @@ namespace CustomerManagementPortal.Api.Controllers
             return Ok(customerEntities);
         }
 
+        [HttpPut("[action/{id}]")]
+        public IActionResult UpdateCustomer(Guid id, [FromBody] CustomerForUpdateDto customerForUpdate)
+        {
+            if (customerForUpdate == null)
+            {
+                _logger.LogError("Customer object sent from client is null.");
+                return BadRequest("Customer object is null");
+            }
+
+            var customer = _repository.Customer.GetCustomerById(id, true);
+
+            if (customer == null)
+            {
+                _logger.LogInfo($"Customer with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            customer.Name = customerForUpdate.Name;
+            customer.LastName = customerForUpdate.LastName;
+            customer.Age = customerForUpdate.Age;
+            customer.Gender = customerForUpdate.Gender;
+            customer.Email = customerForUpdate.Email;
+            customer.PhoneNumber = customerForUpdate.PhoneNumber;
+            customer.Address = customerForUpdate.Address;
+
+            _repository.Save();
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteCustomer(Guid id)
         {
