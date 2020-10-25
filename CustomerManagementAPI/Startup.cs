@@ -1,4 +1,5 @@
 using System.IO;
+using CustomerManagementPortal.Api.ActionFilters;
 using CustomerManagementPortal.Api.Extensions;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
@@ -37,6 +38,9 @@ namespace CustomerManagementPortal.Api
 
             services.Configure<ApiBehaviorOptions>(options =>
                 options.SuppressModelStateInvalidFilter = true);
+
+            services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<ValidateCustomerExistAttribute>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
