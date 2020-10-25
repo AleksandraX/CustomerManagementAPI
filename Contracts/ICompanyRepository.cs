@@ -1,9 +1,7 @@
-﻿
-using System.Collections.Generic;
-using CustomerManagementPortal.Contracts;
+﻿using System.Collections.Generic;
 using CustomerManagementPortal.Entities.Models;
 
-namespace Contracts
+namespace CustomerManagementPortal.Contracts
 {
     public interface ICompanyRepository : IRepositoryBase<Company>
     {

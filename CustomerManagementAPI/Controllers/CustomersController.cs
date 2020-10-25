@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CustomerManagementPortal.Api.ModelBinders;
 using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities.DataTransferredObjects;
@@ -24,9 +25,9 @@ namespace CustomerManagementPortal.Api.Controllers
         }
 
         [HttpGet("[action]")]
-        public IActionResult GetAllCustomers()
+        public async Task<IActionResult> GetAllCustomers()
         {
-            var customers = _repository.Customer.GetAllCustomers();
+            var customers = await _repository.Customer.GetAllAsync();
 
             if (!customers.Any())
             {
@@ -37,9 +38,9 @@ namespace CustomerManagementPortal.Api.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        public IActionResult GetCustomerById(Guid id)
+        public async Task<IActionResult> GetCustomerById(Guid id)
         {
-            var customer = _repository.Customer.GetCustomerById(id, false);
+            var customer = await  _repository.Customer.GetByIdAsync(id, false);
 
             if (customer == null)
             {
@@ -50,12 +51,19 @@ namespace CustomerManagementPortal.Api.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult CreateCustomer([FromBody] CustomerForCreationDto customerToCreate)
+        public async Task<IActionResult> CreateCustomer([FromBody] CustomerForCreationDto customerToCreate)
         {
             if (customerToCreate == null)
             {
                 _logger.LogError("Customer object for creation is null");
                 return BadRequest("Customer for create cannot be empty.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid model state for the CustomerForCreationDto object");
+                return UnprocessableEntity(ModelState);
+
             }
 
             var customerEntity = new Customer()
@@ -70,13 +78,13 @@ namespace CustomerManagementPortal.Api.Controllers
             };
 
             this._repository.Customer.CreateCustomer(customerEntity);
-            this._repository.Save();
+            await this._repository.SaveAsync();
 
             return CreatedAtRoute("GetCustomerById", new {id = customerEntity.Id}, customerEntity);
         }
 
         [HttpGet("[action]/{ids}")]
-        public IActionResult GetManyCustomers([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
+        public async Task<IActionResult> GetManyCustomers([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
             var idsList = ids.ToList();
             if (!idsList.Any())
@@ -85,7 +93,7 @@ namespace CustomerManagementPortal.Api.Controllers
                 return BadRequest("Parameter with ids is empty");
             }
 
-            var customerEntities = _repository.Customer.GetByIds(idsList, false);
+            var customerEntities = await _repository.Customer.GetManyByIdsAsync(idsList, false);
             if (idsList.Count() != customerEntities.Count())
             {
                 _logger.LogError("Some ids are not valid in a collection");
@@ -95,8 +103,8 @@ namespace CustomerManagementPortal.Api.Controllers
             return Ok(customerEntities);
         }
 
-        [HttpPut("[action/{id}]")]
-        public IActionResult UpdateCustomer(Guid id, [FromBody] CustomerForUpdateDto customerForUpdate)
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> UpdateCustomer(Guid id, [FromBody] CustomerForUpdateDto customerForUpdate)
         {
             if (customerForUpdate == null)
             {
@@ -104,7 +112,7 @@ namespace CustomerManagementPortal.Api.Controllers
                 return BadRequest("Customer object is null");
             }
 
-            var customer = _repository.Customer.GetCustomerById(id, true);
+            var customer = await _repository.Customer.GetByIdAsync(id, true);
 
             if (customer == null)
             {
@@ -120,15 +128,15 @@ namespace CustomerManagementPortal.Api.Controllers
             customer.PhoneNumber = customerForUpdate.PhoneNumber;
             customer.Address = customerForUpdate.Address;
 
-            _repository.Save();
+            await _repository.SaveAsync();
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteCustomer(Guid id)
+        public async Task<IActionResult> DeleteCustomer(Guid id)
         {
-            var customer = _repository.Customer.GetCustomerById(id, false);
+            var customer = await _repository.Customer.GetByIdAsync(id, false);
 
             if (customer == null)
             {
@@ -137,7 +145,7 @@ namespace CustomerManagementPortal.Api.Controllers
             }
 
             _repository.Customer.DeleteCustomer(customer);
-            _repository.Save();
+            await _repository.SaveAsync();
 
             return NoContent();
         }

@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using System.Threading.Tasks;
+using Contracts;
 using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities;
 
@@ -23,5 +24,7 @@ namespace CustomerManagementPortal.Repository
         public ICustomerRepository Customer => _customerRepository ??= new CustomerRepository(_repositoryContext);
 
         public void Save() => _repositoryContext.SaveChanges();
+
+        public Task SaveAsync() => _repositoryContext.SaveChangesAsync();
     }
 }

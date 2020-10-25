@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using System.Threading.Tasks;
+using Contracts;
 
 namespace CustomerManagementPortal.Contracts
 {
@@ -8,5 +9,6 @@ namespace CustomerManagementPortal.Contracts
         IEmployeeRepository Employee { get; }
         ICustomerRepository Customer { get; }
         void Save();
+        Task SaveAsync();
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities;
 using CustomerManagementPortal.Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerManagementPortal.Repository
 {
@@ -13,18 +15,18 @@ namespace CustomerManagementPortal.Repository
         {
         }
 
-        public IEnumerable<Customer> GetAllCustomers()
+        public async Task<IEnumerable<Customer>> GetAllAsync()
         {
-            var customers = base.FindAll(false)
+            var customers = await base.FindAll(false)
                 .OrderBy(c => c.LastName)
-                .ToList();
+                .ToListAsync();
 
             return customers;
         }
 
-        public Customer GetCustomerById(Guid id, bool trackChanges)
+        public async Task<Customer> GetByIdAsync(Guid id, bool trackChanges)
         {
-            var customer = base.DbSet.FirstOrDefault(c => c.Id == id);
+            var customer = await base.DbSet.FirstOrDefaultAsync(c => c.Id == id);
 
             return customer;
         }
@@ -34,10 +36,10 @@ namespace CustomerManagementPortal.Repository
             base.Create(customer);
         }
 
-        public IEnumerable<Customer> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+        public async Task<IEnumerable<Customer>> GetManyByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
         {
-            return base.FindByCondition(c => ids.Contains(c.Id), trackChanges)
-                .ToList();
+            return await base.FindByCondition(c => ids.Contains(c.Id), trackChanges)
+                .ToListAsync();
         }
 
         public void DeleteCustomer(Customer customer)
