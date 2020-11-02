@@ -11,6 +11,7 @@ namespace CustomerManagementPortal.Repository
         private ICompanyRepository _companyRepository;
         private IEmployeeRepository _employeeRepository;
         private ICustomerRepository _customerRepository;
+        public IAddressRepository _addressRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -22,6 +23,8 @@ namespace CustomerManagementPortal.Repository
         public IEmployeeRepository Employee => _employeeRepository ??= new EmployeeRepository(_repositoryContext);
 
         public ICustomerRepository Customer => _customerRepository ??= new CustomerRepository(_repositoryContext);
+
+        public IAddressRepository Address => _addressRepository ??= new AddressRepository(_repositoryContext);
 
         public void Save() => _repositoryContext.SaveChanges();
 

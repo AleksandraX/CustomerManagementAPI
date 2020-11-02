@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CustomerManagementPortal.Entities.Models
 {
-    public class Company
+    public class Company : Entity
     {
-        [Column("CompanyId")]
-        public Guid Id { get; set; }
         [Required(ErrorMessage = "Company name is a required field.")]
         [MaxLength(60, ErrorMessage = "Maximum length for the Name is 60 characters.")]
         public string Name { get; set; }

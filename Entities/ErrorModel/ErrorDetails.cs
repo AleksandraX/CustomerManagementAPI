@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Entities.ErrorModel
+namespace CustomerManagementPortal.Entities.ErrorModel
 {
     public class ErrorDetails
     {

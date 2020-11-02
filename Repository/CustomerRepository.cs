@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities;
 using CustomerManagementPortal.Entities.Models;
+using CustomerManagementPortal.Entities.RequestFeatures;
+using CustomerManagementPortal.Entities.Returns;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomerManagementPortal.Repository
@@ -17,18 +19,39 @@ namespace CustomerManagementPortal.Repository
 
         public async Task<IEnumerable<Customer>> GetAllAsync()
         {
-            var customers = await base.FindAll(false)
+            var customers = await base.DbSet.Include(c => c.Address)
                 .OrderBy(c => c.LastName)
                 .ToListAsync();
 
             return customers;
         }
 
-        public async Task<Customer> GetByIdAsync(Guid id, bool trackChanges)
-        {
-            var customer = await base.DbSet.FirstOrDefaultAsync(c => c.Id == id);
 
-            return customer;
+        public async Task<IEnumerable<CustomerListItem>> GetAllListItems()
+        {
+            var customers = await base.DbSet.Include(c => c.Address)
+                .Select(c => new CustomerListItem()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    LastName = c.LastName,
+                    Age = c.Age,
+                    City = c.Address.City,
+                    Email = c.Email,
+                    Gender = c.Gender,
+                    PhoneNumber = c.PhoneNumber
+                })
+                .OrderBy(c => c.LastName)
+                .ToListAsync();
+
+            return customers;
+        }
+
+        public async Task<PagedList<CustomerListItem>> GetPageOfListItems(CustomersParameters customerParameters)
+        {
+            var customers = await this.GetAllListItems();
+
+            return PagedList<CustomerListItem>.ToPagedList(customers, customerParameters.PageNumber, customerParameters.PageSize);
         }
 
         public void CreateCustomer(Customer customer)

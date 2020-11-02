@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CustomerManagementPortal.Entities.Models
 {
-    public class Employee
+    public class Employee : Entity
     {
-        [Column("EmployeeId")]
-        public Guid Id { get; set; }
-
         [Required(ErrorMessage = "Employee name is a required field.")]
         [MaxLength(30, ErrorMessage = "Maximum length for the Name is 30 characters.")]
         public string Name { get; set; }

@@ -3,7 +3,7 @@ using CustomerManagementPortal.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Entities.Configuration
+namespace CustomerManagementPortal.Entities.Configuration
 {
     public class CompanyConfiguration : IEntityTypeConfiguration<Company>
     {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CustomerManagementPortal.Entities.Models;
+using CustomerManagementPortal.Entities.Parameters;
+using CustomerManagementPortal.Entities.Returns;
 
 namespace CustomerManagementPortal.Contracts
 {
@@ -9,11 +11,12 @@ namespace CustomerManagementPortal.Contracts
     {
         public Task<IEnumerable<Customer>> GetAllAsync();
 
-        public Task<Customer> GetByIdAsync(Guid id, bool trackChanges);
-
         public void CreateCustomer(Customer customer);
 
         public Task<IEnumerable<Customer>> GetManyByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
+        Task<IEnumerable<CustomerListItem>> GetPageOfListItems(CustomersParameters customerParameters);
+
+        public Task<IEnumerable<CustomerListItem>> GetAllListItems();
 
         public void DeleteCustomer(Customer customer);
     }

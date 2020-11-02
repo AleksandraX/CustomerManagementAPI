@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace CustomerManagementPortal.Entities.Models
 {
-    public class Address
+    public class Address : Entity
     {
-        public Guid Id { get; set; }
-
         public string Country { get; set; }
 
         public string City { get; set; }

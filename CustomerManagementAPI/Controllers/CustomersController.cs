@@ -7,8 +7,10 @@ using CustomerManagementPortal.Api.ModelBinders;
 using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities.DataTransferredObjects;
 using CustomerManagementPortal.Entities.Models;
+using CustomerManagementPortal.Entities.RequestFeatures;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CustomerManagementPortal.Api.Controllers
 {
@@ -29,6 +31,31 @@ namespace CustomerManagementPortal.Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var customers = await _repository.Customer.GetAllAsync();
+
+            if (!customers.Any())
+            {
+                return NotFound("Non of customers exist.");
+            }
+
+            return Ok(customers);
+        }
+
+
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetPageOfListItems([FromQuery] CustomersParameters customerParameters)
+        {
+            var customers = await _repository.Customer.GetPageOfListItems(customerParameters);
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(customers.MetaData));
+
+            return Ok(customers);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllListItems()
+        {
+            var customers = await _repository.Customer.GetAllListItems();
 
             if (!customers.Any())
             {

@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Entities.ErrorModel;
+using CustomerManagementPortal.Entities.ErrorModel;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
