@@ -1,4 +1,4 @@
-﻿using Contracts;
+﻿using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities;
 using CustomerManagementPortal.Entities.Models;
 

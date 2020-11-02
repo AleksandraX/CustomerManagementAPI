@@ -1,7 +1,6 @@
-﻿using CustomerManagementPortal.Contracts;
-using CustomerManagementPortal.Entities.Models;
+﻿using CustomerManagementPortal.Entities.Models;
 
-namespace Contracts
+namespace CustomerManagementPortal.Contracts
 {
     public interface IEmployeeRepository : IRepositoryBase<Employee>
     {
