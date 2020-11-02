@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CustomerManagementPortal.Entities.Parameters
+﻿namespace CustomerManagementPortal.Entities.RequestFeatures
 {
     public class MetaData
     {
