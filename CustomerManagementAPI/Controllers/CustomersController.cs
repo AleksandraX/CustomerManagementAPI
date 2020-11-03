@@ -8,9 +8,11 @@ using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities.DataTransferredObjects;
 using CustomerManagementPortal.Entities.Models;
 using CustomerManagementPortal.Entities.RequestFeatures;
+using CustomerManagementPortal.Entities.Returns;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NSwag.Annotations;
 
 namespace CustomerManagementPortal.Api.Controllers
 {
@@ -28,6 +30,7 @@ namespace CustomerManagementPortal.Api.Controllers
         }
 
         [HttpGet("[action]")]
+        [SwaggerResponse(typeof(List<Customer>))]
         public async Task<IActionResult> GetAll()
         {
             var customers = await _repository.Customer.GetAllAsync();
@@ -43,6 +46,7 @@ namespace CustomerManagementPortal.Api.Controllers
 
 
         [HttpGet("[action]")]
+        [SwaggerResponse(typeof(PagedList<Customer>))]
         public async Task<IActionResult> GetPageOfListItems([FromQuery] CustomersParameters customerParameters)
         {
             var customers = await _repository.Customer.GetPageOfListItems(customerParameters);
@@ -53,6 +57,7 @@ namespace CustomerManagementPortal.Api.Controllers
         }
 
         [HttpGet("[action]")]
+        [SwaggerResponse(typeof(List<CustomerListItem>))]
         public async Task<IActionResult> GetAllListItems()
         {
             var customers = await _repository.Customer.GetAllListItems();
@@ -67,6 +72,7 @@ namespace CustomerManagementPortal.Api.Controllers
 
         [HttpGet("[action]/{id}")]
         [ServiceFilter(typeof(ValidateCustomerExistAttribute))]
+        [SwaggerResponse(typeof(Customer))]
         public IActionResult GetById(Guid id)
         {
             var customer = HttpContext.Items["customer"] as Customer;
@@ -96,6 +102,7 @@ namespace CustomerManagementPortal.Api.Controllers
         }
 
         [HttpGet("[action]/{ids}")]
+        [SwaggerResponse(typeof(List<Customer>))]
         public async Task<IActionResult> GetMany([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
             var idsList = ids.ToList();
@@ -135,9 +142,9 @@ namespace CustomerManagementPortal.Api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("[action]/{id}")]
         [ServiceFilter(typeof(ValidateCustomerExistAttribute))]
-        public async Task<IActionResult> DeleteCustomer(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var customer = HttpContext.Items["customer"] as Customer;
 

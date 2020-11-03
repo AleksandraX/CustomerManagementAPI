@@ -1,4 +1,4 @@
-﻿namespace CustomerManagementPortal.Entities.Parameters
+﻿namespace CustomerManagementPortal.Entities.RequestFeatures
 {
     public class RequestParameters
     {

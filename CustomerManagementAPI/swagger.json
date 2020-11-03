@@ -1,0 +1,628 @@
+{
+  "x-generator": "NSwag v13.8.2.0 (NJsonSchema v10.2.1.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "Customer Management Portal API",
+    "version": "1.0.0"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/addresses/GetAll": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "operationId": "Addresses_GetAll",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Address"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/addresses/GetById/{id}": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "operationId": "Addresses_GetById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "guid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/GetAll": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_GetAll",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Customer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/GetPageOfListItems": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_GetPageOfListItems",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "pageNumber",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "pageSize",
+            "in": "query",
+            "format": "int32",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PagedListOfCustomer"
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/GetAllListItems": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_GetAllListItems",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerListItem"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/GetById/{id}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_GetById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "guid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/CreateCustomer": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_CreateCustomer",
+        "parameters": [
+          {
+            "name": "customerToCreate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerForCreationDto"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/GetMany/{ids}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_GetMany",
+        "parameters": [
+          {
+            "type": "array",
+            "name": "ids",
+            "in": "path",
+            "required": true,
+            "collectionFormat": "multi",
+            "x-nullable": false,
+            "items": {
+              "type": "string",
+              "format": "guid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Customer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/UpdateCustomer/{id}": {
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_UpdateCustomer",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "guid",
+            "x-nullable": false
+          },
+          {
+            "name": "customerForUpdate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerForUpdateDto"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_Delete",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "guid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "street": {
+              "type": "string"
+            },
+            "zipCode": {
+              "type": "string"
+            },
+            "employees": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Employee": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "age",
+            "position",
+            "companyId"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxLength": 30,
+              "minLength": 1
+            },
+            "age": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "position": {
+              "type": "string",
+              "maxLength": 20,
+              "minLength": 1
+            },
+            "companyId": {
+              "type": "string",
+              "format": "guid"
+            },
+            "company": {
+              "$ref": "#/definitions/Company"
+            }
+          }
+        }
+      ]
+    },
+    "Company": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "address"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxLength": 60,
+              "minLength": 1
+            },
+            "address": {
+              "type": "string",
+              "maxLength": 60,
+              "minLength": 1
+            },
+            "country": {
+              "type": "string"
+            },
+            "employees": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Entity": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        }
+      }
+    },
+    "Customer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "age",
+            "addressId",
+            "gender"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "age": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "address": {
+              "$ref": "#/definitions/Address"
+            },
+            "addressId": {
+              "type": "string",
+              "format": "guid"
+            },
+            "phoneNumber": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "gender": {
+              "$ref": "#/definitions/Gender"
+            }
+          }
+        }
+      ]
+    },
+    "Gender": {
+      "type": "integer",
+      "description": "",
+      "x-enumNames": [
+        "Male",
+        "Female"
+      ],
+      "enum": [
+        0,
+        1
+      ]
+    },
+    "PagedListOfCustomer": {
+      "allOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Customer"
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "MetaData": {
+              "$ref": "#/definitions/MetaData"
+            }
+          }
+        }
+      ]
+    },
+    "MetaData": {
+      "type": "object",
+      "required": [
+        "currentPage",
+        "totalPages",
+        "pageSize",
+        "totalCount",
+        "hasPrevious",
+        "hasNext"
+      ],
+      "properties": {
+        "currentPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasPrevious": {
+          "type": "boolean"
+        },
+        "hasNext": {
+          "type": "boolean"
+        }
+      }
+    },
+    "CustomerListItem": {
+      "type": "object",
+      "required": [
+        "id",
+        "age",
+        "gender"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "city": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/Gender"
+        }
+      }
+    },
+    "CustomerForCreationDto": {
+      "type": "object",
+      "required": [
+        "name",
+        "lastName",
+        "age",
+        "addressId",
+        "gender"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 30,
+          "minLength": 3
+        },
+        "lastName": {
+          "type": "string",
+          "maxLength": 40,
+          "minLength": 1
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "addressId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/Gender"
+        }
+      }
+    },
+    "CustomerForUpdateDto": {
+      "type": "object",
+      "required": [
+        "age",
+        "addressId",
+        "gender"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "addressId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/Gender"
+        }
+      }
+    }
+  }
+}

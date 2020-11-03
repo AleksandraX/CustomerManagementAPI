@@ -48,6 +48,8 @@ namespace CustomerManagementPortal.Api
 
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCustomerExistAttribute>();
+
+            services.AddOpenApiDocument(d => d.Title = "Customer Management Portal API");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +63,9 @@ namespace CustomerManagementPortal.Api
             {
                 app.UseHsts();
             }
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();
