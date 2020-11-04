@@ -18,6 +18,8 @@ namespace CustomerManagementPortal.Contracts
 
         public Task<IEnumerable<CustomerListItem>> GetAllListItems();
 
+        public Task<List<CustomerPersonalData>> GetCustomersPersonalDataByAddressId(Guid addressId);
+
         public void DeleteCustomer(Customer customer);
     }
 }

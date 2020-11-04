@@ -59,6 +59,91 @@
         }
       }
     },
+    "/api/addresses/GetAddressWithResidents": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "operationId": "Addresses_GetAddressWithResidents",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "addressId",
+            "in": "query",
+            "required": true,
+            "format": "guid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddressWithResidents"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/addresses/Create": {
+      "post": {
+        "tags": [
+          "Addresses"
+        ],
+        "operationId": "Addresses_Create",
+        "parameters": [
+          {
+            "name": "addressForCreationDto",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddressForCreationDto"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/api/addresses/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "Addresses"
+        ],
+        "operationId": "Addresses_Delete",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "guid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/api/customers/GetAll": {
       "get": {
         "tags": [
@@ -215,6 +300,36 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Customer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/GetCustomersByAddress/{addressId}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_GetCustomersByAddress",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "addressId",
+            "in": "path",
+            "required": true,
+            "format": "guid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerPersonalData"
               }
             }
           }
@@ -402,6 +517,85 @@
         }
       }
     },
+    "AddressWithResidents": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "residents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerContact"
+          }
+        }
+      }
+    },
+    "CustomerContact": {
+      "type": "object",
+      "required": [
+        "customerId"
+      ],
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "AddressForCreationDto": {
+      "type": "object",
+      "required": [
+        "street",
+        "zipCode"
+      ],
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string",
+          "maxLength": 30,
+          "minLength": 3
+        },
+        "zipCode": {
+          "type": "string",
+          "maxLength": 6,
+          "minLength": 5
+        }
+      }
+    },
     "Customer": {
       "allOf": [
         {
@@ -552,7 +746,6 @@
         "name",
         "lastName",
         "age",
-        "addressId",
         "gender"
       ],
       "properties": {
@@ -570,17 +763,55 @@
           "type": "integer",
           "format": "int32"
         },
-        "address": {
-          "$ref": "#/definitions/Address"
+        "country": {
+          "type": "string"
         },
-        "addressId": {
-          "type": "string",
-          "format": "guid"
+        "city": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
         },
         "phoneNumber": {
           "type": "string"
         },
         "email": {
+          "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/Gender"
+        }
+      }
+    },
+    "CustomerPersonalData": {
+      "type": "object",
+      "required": [
+        "id",
+        "age",
+        "gender"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phoneNumber": {
           "type": "string"
         },
         "gender": {

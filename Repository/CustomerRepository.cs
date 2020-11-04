@@ -54,6 +54,26 @@ namespace CustomerManagementPortal.Repository
             return PagedList<CustomerListItem>.ToPagedList(customers, customerParameters.PageNumber, customerParameters.PageSize);
         }
 
+        public async Task<List<CustomerPersonalData>> GetCustomersPersonalDataByAddressId(Guid addressId)
+        {
+            var customersData = await this.DbSet
+                .Where(c => c.AddressId == addressId)
+                .Select(c => new CustomerPersonalData()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    LastName = c.LastName,
+                    Age = c.Age,
+                    Email = c.Email,
+                    Gender = c.Gender,
+                    PhoneNumber = c.PhoneNumber
+                })
+                .OrderBy(c => c.LastName)
+                .ToListAsync();
+
+            return customersData;
+        }
+
         public void CreateCustomer(Customer customer)
         {
             base.Create(customer);

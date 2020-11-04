@@ -92,7 +92,13 @@ namespace CustomerManagementPortal.Api.Controllers
                 Email = customerToCreate.Email,
                 Gender = customerToCreate.Gender,
                 PhoneNumber = customerToCreate.PhoneNumber,
-                Address = customerToCreate.Address
+                Address = new Address()
+                {
+                    Country = customerToCreate.Country,
+                    City = customerToCreate.City,
+                    Street = customerToCreate.Street,
+                    ZipCode = customerToCreate.ZipCode
+                }
             };
 
             this._repository.Customer.CreateCustomer(customerEntity);
@@ -121,6 +127,25 @@ namespace CustomerManagementPortal.Api.Controllers
 
             return Ok(customerEntities);
         }
+
+
+
+        [HttpGet("[action]/{addressId}")]
+        [SwaggerResponse(typeof(List<CustomerPersonalData>))]
+        public async Task<IActionResult> GetCustomersByAddress(Guid addressId)
+        {
+            var address = await this._repository.Address.GetByIdAsync(addressId, false);
+
+            if (address == null)
+            {
+                return NotFound("This address does not exist");
+            }
+
+            var customerList = await this._repository.Customer.GetCustomersPersonalDataByAddressId(addressId);
+
+            return Ok(customerList);
+        }
+
 
         [HttpPut("[action]/{id}")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]

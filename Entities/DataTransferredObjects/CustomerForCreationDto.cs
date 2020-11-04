@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.ComponentModel.DataAnnotations;
 using CustomerManagementPortal.Entities.Enums;
 using CustomerManagementPortal.Entities.Models;
@@ -19,8 +20,13 @@ namespace CustomerManagementPortal.Entities.DataTransferredObjects
         [Required(ErrorMessage = "Age is a required field.")]
         public int Age { get; set; }
 
-        public Address Address { get; set; }
-        public Guid AddressId { get; set; }
+        public string Country { get; set; }
+
+        public string City { get; set; }
+
+        public string ZipCode { get; set; }
+
+        public string Street { get; set; }
 
         public string PhoneNumber { get; set; }
 
