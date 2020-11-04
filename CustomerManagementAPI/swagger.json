@@ -59,7 +59,7 @@
         }
       }
     },
-    "/api/addresses/GetAddressWithResidents": {
+    "/api/addresses/GetAddressWithResidents/{addressId}": {
       "get": {
         "tags": [
           "Addresses"
@@ -69,7 +69,7 @@
           {
             "type": "string",
             "name": "addressId",
-            "in": "query",
+            "in": "path",
             "required": true,
             "format": "guid",
             "x-nullable": false

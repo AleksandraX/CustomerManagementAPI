@@ -46,7 +46,7 @@ namespace CustomerManagementPortal.Api.Controllers
             return Ok(addresses);
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]/{addressId}")]
         [SwaggerResponse(typeof(List<AddressWithResidents>))]
         public async Task<IActionResult> GetAddressWithResidents(Guid addressId)
         {
