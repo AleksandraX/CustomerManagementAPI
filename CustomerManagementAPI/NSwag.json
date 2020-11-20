@@ -5,7 +5,8 @@
     "webApiToOpenApi": {
       "controllerNames": [
         "CustomerManagementPortal.Api.Controllers.AddressesController",
-        "CustomerManagementPortal.Api.Controllers.CustomersController"
+        "CustomerManagementPortal.Api.Controllers.CustomersController",
+        "CustomerManagementPortal.Api.Controllers.OrdersController"
       ],
       "isAspNetCore": true,
       "resolveJsonOptions": false,

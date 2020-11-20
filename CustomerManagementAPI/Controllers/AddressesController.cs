@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CustomerManagementPortal.Api.ActionFilters;
 using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities.DataTransferredObjects;
 using CustomerManagementPortal.Entities.Models;

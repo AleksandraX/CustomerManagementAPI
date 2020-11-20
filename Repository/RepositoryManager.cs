@@ -11,6 +11,8 @@ namespace CustomerManagementPortal.Repository
         private IEmployeeRepository _employeeRepository;
         private ICustomerRepository _customerRepository;
         public IAddressRepository _addressRepository;
+        public IOrderRepository _orderRepository;
+        public IOrderStatusRepository _orderStatusRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -25,7 +27,12 @@ namespace CustomerManagementPortal.Repository
 
         public IAddressRepository Address => _addressRepository ??= new AddressRepository(_repositoryContext);
 
-        public void Save() => _repositoryContext.SaveChanges();
+        public IOrderRepository Orders => _orderRepository ??= new OrderRepository(_repositoryContext);
+
+        public IOrderStatusRepository OrderStatuses => _orderStatusRepository ??= new OrderStatusRepository(_repositoryContext);
+       
+
+    public void Save() => _repositoryContext.SaveChanges();
 
         public Task SaveAsync() => _repositoryContext.SaveChangesAsync();
     }

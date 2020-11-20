@@ -85,6 +85,16 @@ namespace CustomerManagementPortal.Repository
                 .ToListAsync();
         }
 
+        public new async Task<Customer> GetByIdAsync(Guid id, bool trackChanges)
+        {
+            var address = trackChanges
+                ? await this.DbSet.Include(c => c.Address).FirstOrDefaultAsync(a => a.Id == id)
+                : await this.DbSet.Include(c => c.Address).AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
+
+            return address;
+        }
+
+
         public void DeleteCustomer(Customer customer)
         {
             base.Delete(customer);

@@ -13,7 +13,7 @@ namespace CustomerManagementPortal.Entities.Configuration
             builder.HasData(
                 new Customer
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("DC003AA0-8F29-4BE3-A623-69FC9136E9D2"),
                     Name = "Sisi",
                     LastName = "Murlik",
                     Age = 5,
@@ -24,7 +24,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                 },
                 new Customer
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("DAA46F02-4E4E-4342-BD74-0714B77ED535"),
                     Name = "Amor",
                     LastName = "Murlik",
                     Age = 3,
@@ -35,7 +35,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                 },
                 new Customer
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("E0219757-B2E6-46B3-855B-335F2D9A94CC"),
                     Name = "Paula",
                     LastName = "Murlik",
                     Age = 17,
@@ -46,7 +46,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                 },
                 new Customer
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("5B686772-258F-412C-9C00-4D29FDEF1FB7"),
                     Name = "Kacper",
                     LastName = "Bergański",
                     Age = 21,
@@ -57,7 +57,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                 },
                 new Customer
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("C6E963AE-CA9E-4BCB-9C13-A58C2F7B0FFA"),
                     Name = "Daria",
                     LastName = "Bergańska",
                     Age = 0,
@@ -68,7 +68,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                 },
                 new Customer
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("46B94AAC-2F6E-4B0F-B0AE-F18549B96B36"),
                     Name = "Aleksandra",
                     LastName = "Czerwińska",
                     Age = 28,
@@ -79,7 +79,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                 },
                 new Customer
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("4c980cfa-ded9-4d64-82bd-3d461719249b"),
                     Name = "Julia",
                     LastName = "Czerwińska",
                     Age = 20,

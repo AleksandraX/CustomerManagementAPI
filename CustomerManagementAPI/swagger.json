@@ -398,6 +398,114 @@
           }
         }
       }
+    },
+    "/api/orders/GetAllListItems": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "Orders_GetAllListItems",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrderInfo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/orders/GetById/{id}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "Orders_GetById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "format": "guid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      }
+    },
+    "/api/orders/ChangeOrderStatus": {
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "Orders_ChangeOrderStatus",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "orderId",
+            "in": "query",
+            "format": "guid",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "newOrderStatusId",
+            "in": "query",
+            "format": "guid",
+            "x-nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
+    "/api/orders/CreateOrder": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "Orders_CreateOrder",
+        "parameters": [
+          {
+            "name": "orderForCreationDto",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrderForCreationDto"
+            },
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -852,6 +960,121 @@
         },
         "gender": {
           "$ref": "#/definitions/Gender"
+        }
+      }
+    },
+    "OrderInfo": {
+      "type": "object",
+      "required": [
+        "id",
+        "price",
+        "creationDate",
+        "orderedByCustomerId",
+        "statusId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "price": {
+          "type": "number",
+          "format": "decimal"
+        },
+        "creationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdateDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "orderedByCustomerId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "orderedByCustomerFullName": {
+          "type": "string"
+        },
+        "statusId": {
+          "type": "string",
+          "format": "guid"
+        }
+      }
+    },
+    "Order": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "required": [
+            "price",
+            "creationDate",
+            "orderedByCustomerId",
+            "statusId"
+          ],
+          "properties": {
+            "price": {
+              "type": "number",
+              "format": "decimal"
+            },
+            "creationDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "lastUpdateDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "orderedByCustomerId": {
+              "type": "string",
+              "format": "guid"
+            },
+            "orderedByCustomer": {
+              "$ref": "#/definitions/Customer"
+            },
+            "statusId": {
+              "type": "string",
+              "format": "guid"
+            },
+            "status": {
+              "$ref": "#/definitions/OrderStatus"
+            }
+          }
+        }
+      ]
+    },
+    "OrderStatus": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "OrderForCreationDto": {
+      "type": "object",
+      "required": [
+        "orderedByCustomerId",
+        "price"
+      ],
+      "properties": {
+        "orderedByCustomerId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "price": {
+          "type": "number",
+          "format": "decimal"
         }
       }
     }

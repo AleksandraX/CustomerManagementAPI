@@ -8,6 +8,8 @@ namespace CustomerManagementPortal.Contracts
         IEmployeeRepository Employee { get; }
         ICustomerRepository Customer { get; }
         IAddressRepository Address { get; }
+        IOrderRepository Orders { get; }
+        IOrderStatusRepository OrderStatuses { get; }
         void Save();
         Task SaveAsync();
     }
