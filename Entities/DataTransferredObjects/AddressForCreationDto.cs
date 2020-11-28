@@ -1,11 +1,12 @@
 ﻿
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CustomerManagementPortal.Entities.DataTransferredObjects
 {
     public class AddressForCreationDto
     {
-        public string Country { get; set; }
+        public Guid CountryId { get; set; }
 
         public string City { get; set; }
 

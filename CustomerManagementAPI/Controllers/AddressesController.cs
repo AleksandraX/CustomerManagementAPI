@@ -1,8 +1,12 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
+using CustomerManagementPortal.Api.ModelBinders;
 using CustomerManagementPortal.Contracts;
 using CustomerManagementPortal.Entities.DataTransferredObjects;
 using CustomerManagementPortal.Entities.Models;
@@ -10,6 +14,7 @@ using CustomerManagementPortal.Entities.Returns;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using NSwag.Annotations;
 
 namespace CustomerManagementPortal.Api.Controllers
@@ -26,6 +31,52 @@ namespace CustomerManagementPortal.Api.Controllers
             Logger = logger;
             _repository = repository;
         }
+
+
+        [HttpGet("[action]")]
+        //[SwaggerResponse(typeof(List<Country>)]
+        public async Task<IActionResult> SeedAllCountries()
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri("https://countries-cities.p.rapidapi.com/location/country/list"),
+                Headers =
+                    {
+                        { "x-rapidapi-key", "4290992691mshd2665330073ebefp16d367jsnd0f459008da4" },
+                        { "x-rapidapi-host", "countries-cities.p.rapidapi.com" },
+                    },
+            };
+
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+
+                CountryReponse countryReponse = JsonConvert.DeserializeObject<CountryReponse>(body);
+
+                foreach(var countryProp in countryReponse.countries.GetType().GetProperties())
+                {
+
+                    var country = new Country()
+                    {
+                        Name = countryProp.GetValue(countryReponse.countries).ToString(),
+                        Code = countryProp.Name
+                    };
+
+                    this._repository.Country.Create(country);
+                }
+
+                this._repository.Save();
+
+                
+                return Ok(countryReponse);
+            }
+
+          
+        }
+
 
         [HttpGet("[action]")]
         [SwaggerResponse(typeof(List<Address>))]
@@ -62,7 +113,7 @@ namespace CustomerManagementPortal.Api.Controllers
             {
                 Id = address.Id,
                 City = address.City,
-                Country = address.Country,
+                Country = address.Country.Name,
                 ZipCode = address.ZipCode,
                 Street = address.Street,
                 Residents = residents.Select(r => new CustomerContact()
@@ -89,7 +140,7 @@ namespace CustomerManagementPortal.Api.Controllers
 
             var address = new Address()
             {
-                Country = addressForCreationDto.Country,
+                CountryId = addressForCreationDto.CountryId,
                 City = addressForCreationDto.City,
                 ZipCode = addressForCreationDto.ZipCode,
                 Street = addressForCreationDto.Street

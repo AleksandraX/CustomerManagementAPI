@@ -5,7 +5,8 @@ namespace CustomerManagementPortal.Entities.Models
 {
     public class Address : Entity
     {
-        public string Country { get; set; }
+        public Guid CountryId { get; set; }
+        public Country Country { get; set; }
 
         public string City { get; set; }
 

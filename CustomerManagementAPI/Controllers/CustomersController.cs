@@ -94,7 +94,7 @@ namespace CustomerManagementPortal.Api.Controllers
                 PhoneNumber = customerToCreate.PhoneNumber,
                 Address = new Address()
                 {
-                    Country = customerToCreate.Country,
+                    CountryId = customerToCreate.CountryId,
                     City = customerToCreate.City,
                     Street = customerToCreate.Street,
                     ZipCode = customerToCreate.ZipCode

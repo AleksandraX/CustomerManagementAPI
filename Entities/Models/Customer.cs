@@ -12,7 +12,7 @@ namespace CustomerManagementPortal.Entities.Models
         public int Age { get; set; }
 
         public Address Address { get; set; }
-        public Guid AddressId { get; set; }
+        public Guid? AddressId { get; set; }
 
         public string PhoneNumber { get; set; }
 

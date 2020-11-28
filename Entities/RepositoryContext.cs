@@ -14,6 +14,7 @@ namespace CustomerManagementPortal.Entities
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

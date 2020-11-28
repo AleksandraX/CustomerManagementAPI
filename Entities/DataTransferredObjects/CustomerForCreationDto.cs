@@ -20,7 +20,7 @@ namespace CustomerManagementPortal.Entities.DataTransferredObjects
         [Required(ErrorMessage = "Age is a required field.")]
         public int Age { get; set; }
 
-        public string Country { get; set; }
+        public Guid CountryId { get; set; }
 
         public string City { get; set; }
 

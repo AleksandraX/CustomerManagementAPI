@@ -10,9 +10,10 @@ namespace CustomerManagementPortal.Repository
         private ICompanyRepository _companyRepository;
         private IEmployeeRepository _employeeRepository;
         private ICustomerRepository _customerRepository;
-        public IAddressRepository _addressRepository;
-        public IOrderRepository _orderRepository;
-        public IOrderStatusRepository _orderStatusRepository;
+        private IAddressRepository _addressRepository;
+        private IOrderRepository _orderRepository;
+        private IOrderStatusRepository _orderStatusRepository;
+        private ICountryRepository _countryRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -30,6 +31,8 @@ namespace CustomerManagementPortal.Repository
         public IOrderRepository Orders => _orderRepository ??= new OrderRepository(_repositoryContext);
 
         public IOrderStatusRepository OrderStatuses => _orderStatusRepository ??= new OrderStatusRepository(_repositoryContext);
+
+        public ICountryRepository Country => _countryRepository ??= new CountryRepository(_repositoryContext);
        
 
     public void Save() => _repositoryContext.SaveChanges();

@@ -12,6 +12,23 @@
     "application/json"
   ],
   "paths": {
+    "/api/addresses/SeedAllCountries": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "operationId": "Addresses_SeedAllCountries",
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/api/addresses/GetAll": {
       "get": {
         "tags": [
@@ -516,9 +533,16 @@
         },
         {
           "type": "object",
+          "required": [
+            "countryId"
+          ],
           "properties": {
+            "countryId": {
+              "type": "string",
+              "format": "guid"
+            },
             "country": {
-              "type": "string"
+              "$ref": "#/definitions/Country"
             },
             "city": {
               "type": "string"
@@ -538,6 +562,36 @@
           }
         }
       ]
+    },
+    "Country": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "code": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "Entity": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        }
+      }
     },
     "Employee": {
       "allOf": [
@@ -613,18 +667,6 @@
         }
       ]
     },
-    "Entity": {
-      "type": "object",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "guid"
-        }
-      }
-    },
     "AddressWithResidents": {
       "type": "object",
       "required": [
@@ -682,12 +724,14 @@
     "AddressForCreationDto": {
       "type": "object",
       "required": [
+        "countryId",
         "street",
         "zipCode"
       ],
       "properties": {
-        "country": {
-          "type": "string"
+        "countryId": {
+          "type": "string",
+          "format": "guid"
         },
         "city": {
           "type": "string"
@@ -713,7 +757,6 @@
           "type": "object",
           "required": [
             "age",
-            "addressId",
             "gender"
           ],
           "properties": {
@@ -854,6 +897,7 @@
         "name",
         "lastName",
         "age",
+        "countryId",
         "gender"
       ],
       "properties": {
@@ -871,8 +915,9 @@
           "type": "integer",
           "format": "int32"
         },
-        "country": {
-          "type": "string"
+        "countryId": {
+          "type": "string",
+          "format": "guid"
         },
         "city": {
           "type": "string"

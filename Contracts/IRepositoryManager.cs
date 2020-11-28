@@ -10,6 +10,7 @@ namespace CustomerManagementPortal.Contracts
         IAddressRepository Address { get; }
         IOrderRepository Orders { get; }
         IOrderStatusRepository OrderStatuses { get; }
+        ICountryRepository Country { get; }
         void Save();
         Task SaveAsync();
     }

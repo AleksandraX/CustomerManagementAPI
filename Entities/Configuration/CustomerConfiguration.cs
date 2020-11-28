@@ -20,7 +20,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                     Gender = Gender.Female,
                     Email = "sisi.kaczuszka@wp.pl",
                     PhoneNumber = "666666666",
-                    AddressId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3")
+                   // AddressId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3")
                 },
                 new Customer
                 {
@@ -31,7 +31,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                     Gender = Gender.Male,
                     Email = "amor.buziaczek@onet.pl",
                     PhoneNumber = "555-555-555",
-                    AddressId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3")
+                   // AddressId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3")
                 },
                 new Customer
                 {
@@ -42,7 +42,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                     Gender = Gender.Female,
                     Email = "prywatny.murlik@gmail.com",
                     PhoneNumber = "537843591",
-                    AddressId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3")
+                   // AddressId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3")
                 },
                 new Customer
                 {
@@ -53,7 +53,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                     Gender = Gender.Male,
                     Email = "kacper.berganski@onet.com",
                     PhoneNumber = "720860430",
-                    AddressId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870")
+                   // AddressId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870")
                 },
                 new Customer
                 {
@@ -64,7 +64,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                     Gender = Gender.Female,
                     Email = "",
                     PhoneNumber = "",
-                    AddressId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                    //AddressId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
                 },
                 new Customer
                 {
@@ -75,7 +75,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                     Gender = Gender.Female,
                     Email = "aleksandra.czerwa@gmail.com",
                     PhoneNumber = "506139325",
-                    AddressId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
+                   // AddressId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
                 },
                 new Customer
                 {
@@ -86,7 +86,7 @@ namespace CustomerManagementPortal.Entities.Configuration
                     Gender = Gender.Female,
                     Email = "j.czerwinska@o2.pl",
                     PhoneNumber = "512899657",
-                    AddressId = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811"),
+                   // AddressId = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811"),
                 }
             );
         }
