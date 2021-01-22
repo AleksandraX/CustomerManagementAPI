@@ -82,10 +82,21 @@ namespace CustomerManagementPortal.Api.Controllers
         [SwaggerResponse(typeof(List<Address>))]
         public async Task<IActionResult> GetAll()
         {
-            var addresses = await this._repository.Address.FindAll(false).ToListAsync();
+            var addresses = await this._repository.Address.GetAllFullAddresses();
 
             return Ok(addresses);
         }
+
+        [HttpGet("[action]")]
+        [SwaggerResponse(typeof(List<Country>))]
+        public async Task<IActionResult> GetAllCountries()
+        {
+            var countries = await this._repository.Country.FindAll(false).ToListAsync();
+
+            return Ok(countries);
+        }
+
+
 
         [HttpGet("[action]/{id}")]
         [SwaggerResponse(typeof(Address))]
@@ -100,7 +111,7 @@ namespace CustomerManagementPortal.Api.Controllers
         [SwaggerResponse(typeof(List<AddressWithResidents>))]
         public async Task<IActionResult> GetAddressWithResidents(Guid addressId)
         {
-            var address = await this._repository.Address.GetByIdAsync(addressId, false);
+            var address = await this._repository.Address.GetByIdAsync(addressId);
 
             if (address == null)
             {

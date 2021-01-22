@@ -49,6 +49,26 @@
         }
       }
     },
+    "/api/addresses/GetAllCountries": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "operationId": "Addresses_GetAllCountries",
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/addresses/GetById/{id}": {
       "get": {
         "tags": [
