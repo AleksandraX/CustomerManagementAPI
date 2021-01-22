@@ -32,10 +32,18 @@ namespace CustomerManagementPortal.Api.Controllers
             _repository = repository;
         }
 
+        [HttpGet("[action]")]
+        [SwaggerResponse(typeof(List<Country>))]
+        public async Task<IActionResult> GetAllCountries()
+        {
+            var addresses = await this._repository.Country.FindAll(false).ToListAsync();
+
+            return Ok(addresses);
+        }
 
         [HttpGet("[action]")]
         //[SwaggerResponse(typeof(List<Country>)]
-        public async Task<IActionResult> SeedAllCountries()
+        private async Task<IActionResult> SeedAllCountries()
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage
@@ -73,8 +81,6 @@ namespace CustomerManagementPortal.Api.Controllers
                 
                 return Ok(countryReponse);
             }
-
-          
         }
 
 

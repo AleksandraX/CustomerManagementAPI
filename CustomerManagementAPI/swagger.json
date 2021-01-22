@@ -12,18 +12,21 @@
     "application/json"
   ],
   "paths": {
-    "/api/addresses/SeedAllCountries": {
+    "/api/addresses/GetAllCountries": {
       "get": {
         "tags": [
           "Addresses"
         ],
-        "operationId": "Addresses_SeedAllCountries",
+        "operationId": "Addresses_GetAllCountries",
         "responses": {
           "200": {
-            "x-nullable": true,
+            "x-nullable": false,
             "description": "",
             "schema": {
-              "type": "file"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
             }
           }
         }
@@ -546,6 +549,36 @@
     }
   },
   "definitions": {
+    "Country": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "code": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "Entity": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        }
+      }
+    },
     "Address": {
       "allOf": [
         {
@@ -582,36 +615,6 @@
           }
         }
       ]
-    },
-    "Country": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "code": {
-              "type": "string"
-            }
-          }
-        }
-      ]
-    },
-    "Entity": {
-      "type": "object",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "guid"
-        }
-      }
     },
     "Employee": {
       "allOf": [
