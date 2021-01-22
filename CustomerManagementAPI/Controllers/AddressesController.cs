@@ -33,15 +33,6 @@ namespace CustomerManagementPortal.Api.Controllers
         }
 
         [HttpGet("[action]")]
-        [SwaggerResponse(typeof(List<Country>))]
-        public async Task<IActionResult> GetAllCountries()
-        {
-            var addresses = await this._repository.Country.FindAll(false).ToListAsync();
-
-            return Ok(addresses);
-        }
-
-        [HttpGet("[action]")]
         //[SwaggerResponse(typeof(List<Country>)]
         private async Task<IActionResult> SeedAllCountries()
         {
