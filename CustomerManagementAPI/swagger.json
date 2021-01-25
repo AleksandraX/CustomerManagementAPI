@@ -12,23 +12,6 @@
     "application/json"
   ],
   "paths": {
-    "/api/addresses/SeedAllCountries": {
-      "get": {
-        "tags": [
-          "Addresses"
-        ],
-        "operationId": "Addresses_SeedAllCountries",
-        "responses": {
-          "200": {
-            "x-nullable": true,
-            "description": "",
-            "schema": {
-              "type": "file"
-            }
-          }
-        }
-      }
-    },
     "/api/addresses/GetAll": {
       "get": {
         "tags": [

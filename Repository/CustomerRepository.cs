@@ -88,8 +88,8 @@ namespace CustomerManagementPortal.Repository
         public new async Task<Customer> GetByIdAsync(Guid id, bool trackChanges)
         {
             var address = trackChanges
-                ? await this.DbSet.Include(c => c.Address).FirstOrDefaultAsync(a => a.Id == id)
-                : await this.DbSet.Include(c => c.Address).AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
+                ? await this.DbSet.Include(c => c.Address).ThenInclude(a => a.Country).FirstOrDefaultAsync(a => a.Id == id)
+                : await this.DbSet.Include(c => c.Address).ThenInclude(a => a.Country).AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
 
             return address;
         }
